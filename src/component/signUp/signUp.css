@@ -1,0 +1,14 @@
+form input{
+    border: 1px solid white;
+    height: 36px;
+    color: white;
+    padding-left: 20px;
+}
+
+form input::placeholder{
+    color: #ffffff5d;
+}
+
+form input:focus-visible{
+    outline: 0;
+}
