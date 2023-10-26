@@ -14,11 +14,9 @@ const StudentAlumni = () => {
     }
     
   };
-
   return (
     <form className="student_alumni">
       <h2 className="fs-4 fw-bold text-white mb-2">Students & Alumni</h2>
-
       <div className="sign-up p-2">
         <label htmlFor="signup" className="text-white">
           Enter your student email to sign up*

@@ -171,6 +171,7 @@ const StudentSignup = () => {
             </label>
             <div className="input_field mb-2">
               <input
+                required
                 onChange={(e) =>
                   setStudentDetails({
                     ...studentDetails,
@@ -187,6 +188,7 @@ const StudentSignup = () => {
               </label>
               <div className="input_field mb-2">
                 <input
+                  required
                   onChange={(e) =>
                     setStudentDetails({
                       ...studentDetails,
@@ -205,6 +207,7 @@ const StudentSignup = () => {
               </label>
               <div className="input_field mb-2">
                 <input
+                  required
                   onChange={(e) =>
                     setStudentDetails({
                       ...studentDetails,
@@ -223,6 +226,7 @@ const StudentSignup = () => {
               </label>
               <div className="input_field mb-2">
                 <Select
+                  required
                   //   onChange={handleCategoryChange}
                   onChange={(selectedOption) =>
                     handleCategoryChange(selectedOption, "institutionSelect")
@@ -293,6 +297,7 @@ const StudentSignup = () => {
               </label>
               <div className="input_field mb-2">
                 <Select
+                  required
                   //   onChange={handleCategoryChange}
                   onChange={(selectedOption) =>
                     handleCategoryChange(selectedOption, "graduationSelect")

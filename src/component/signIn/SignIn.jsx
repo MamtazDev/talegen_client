@@ -9,10 +9,10 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  // eslint-disable-next-line no-unused-vars
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
-  const singinHandler = () => {
-    // Disable the button
+  const singinHandler = (e) => {
+    e.preventDefault();
     setIsButtonDisabled(true);
 
     console.log("loginSate", loginSate);
@@ -28,7 +28,10 @@ const SignIn = () => {
         console.error("Error making POST request:", error);
       })
       .finally(() => {
-        // Re-enable the button after the request is completed (whether it's successful or there's an error)
+        setLoginState({
+          email: "",
+          password: "",
+        });
         setIsButtonDisabled(false);
       });
   };
@@ -39,22 +42,22 @@ const SignIn = () => {
         <div className="section-head text-center mt-3 mb-5">
           <Image src={TeleGenLogo} alt="logo" />
           <h2 className="fs-2 fw-semibold text-white mb-4">Sign In TalenGen</h2>
-
           <p className="fs-4 fw-semibold text-white">
             Get Ready to Empower your Recruiting Journey
           </p>
         </div>
 
-        <form>
+        <form onSubmit={(e) => singinHandler(e)}>
           <div className="sign-up p-2">
             <label htmlFor="studentEmail" className="text-white">
               Enter your Student Email*
             </label>
             <div className="input_field mb-2">
               <input
-                onBlur={(e) =>
+                onChange={(e) =>
                   setLoginState({ ...loginSate, email: e.target.value })
                 }
+                value={loginSate.email}
                 id="studentEmail"
                 type="email"
                 className="w-100 bg-transparent border-white"
@@ -69,12 +72,13 @@ const SignIn = () => {
               <div className="input_field mb-2">
                 <input
                   required
-                  onBlur={(e) =>
+                  onChange={(e) =>
                     setLoginState({ ...loginSate, password: e.target.value })
                   }
                   id="password"
                   type="password"
                   className="w-100 bg-transparent border-white"
+                  value={loginSate.password}
                 />
               </div>
             </div>
@@ -84,7 +88,7 @@ const SignIn = () => {
             <button
               type="submit"
               className="commn-btn mb-4 mb-md-0"
-              onClick={singinHandler}
+              disabled={isButtonDisabled}
             >
               Sign In
             </button>
@@ -97,7 +101,15 @@ const SignIn = () => {
           </div>
         </form>
 
-        <form type="submit" className="student_alumni">
+        {/* ___________________________******************************_________________________ */}
+
+        {/* ___________________________******************************_________________________ */}
+
+        <form
+          type="submit"
+          className="student_alumni"
+          onSubmit={(e) => singinHandler(e)}
+        >
           <h2 className="fs-4 fw-bold text-white mb-3">
             Employers & University Counselors
           </h2>
@@ -117,6 +129,7 @@ const SignIn = () => {
                   type="email"
                   className="w-100 bg-transparent border-white"
                   placeholder="example@talengen.com"
+                  value={loginSate.email}
                 />
               </div>
             </div>
@@ -134,6 +147,7 @@ const SignIn = () => {
                   id="password2"
                   type="password"
                   className="w-100 bg-transparent border-white"
+                  value={loginSate.password}
                 />
               </div>
             </div>
@@ -141,7 +155,6 @@ const SignIn = () => {
             <div className="sign-up d-flex flex-wrap align-items-center justify-content-between">
               <button
                 type="submit"
-                onClick={singinHandler}
                 className="commn-btn text-white border-0 mb-4 mb-md-0"
                 disabled={isButtonDisabled}
               >
