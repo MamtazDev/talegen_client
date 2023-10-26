@@ -9,12 +9,11 @@ const ResetPassword = () => {
   const [resetPassword, setResetPassword] = useState(false);
   const [email, setEmail] = useState(null);
   const navigate = useNavigate();
-  const handleResetPassword = (e) => {
-    // if (email === null  ) {
-    //   alert("please provide email first")
-    // }
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+  const handleResetPassword = (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true);
     axios
       .post(
         "https://talengen-server.onrender.com/api/v1/users/forgot-password",
@@ -30,6 +29,9 @@ const ResetPassword = () => {
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
+      })
+      .finally(() => {
+        setIsButtonDisabled(false);
       });
   };
 
@@ -76,7 +78,7 @@ const ResetPassword = () => {
           <div className="text-center">
             <button
               className="commn-btn mb-4 mb-md-0"
-              // onClick={handleResetPassword}
+              disabled={isButtonDisabled}
               type="submit"
             >
               RESET PASSWORD

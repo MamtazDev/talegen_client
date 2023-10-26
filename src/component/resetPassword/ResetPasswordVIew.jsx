@@ -8,6 +8,7 @@ const ResetPasswordVIew = () => {
   // eslint-disable-next-line no-unused-vars
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -15,6 +16,7 @@ const ResetPasswordVIew = () => {
 
   const handleResetPassword = (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true);
     const requestData = {
       old_password: oldPassword,
       new_password: newPassword,
@@ -31,6 +33,9 @@ const ResetPasswordVIew = () => {
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
+      })
+      .finally(() => {
+        setIsButtonDisabled(false);
       });
   };
 
@@ -88,7 +93,11 @@ const ResetPasswordVIew = () => {
 
         <div>
           <div className="text-center">
-            <button className="commn-btn mb-4 mb-md-0" type="submit">
+            <button
+              disabled={isButtonDisabled}
+              className="commn-btn mb-4 mb-md-0"
+              type="submit"
+            >
               RESET PASSWORD
             </button>
           </div>
