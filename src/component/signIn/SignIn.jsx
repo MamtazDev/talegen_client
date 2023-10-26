@@ -9,8 +9,12 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const singinHandler = () => {
+    // Disable the button
+    setIsButtonDisabled(true);
+
     console.log("loginSate", loginSate);
     axios
       .post(
@@ -18,10 +22,14 @@ const SignIn = () => {
         loginSate
       )
       .then((response) => {
-        console.log("Logged in successfull", response);
+        console.log("Logged in successfully", response);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
+      })
+      .finally(() => {
+        // Re-enable the button after the request is completed (whether it's successful or there's an error)
+        setIsButtonDisabled(false);
       });
   };
 
@@ -89,7 +97,7 @@ const SignIn = () => {
           </div>
         </form>
 
-        <form className="student_alumni">
+        <form type="submit" className="student_alumni">
           <h2 className="fs-4 fw-bold text-white mb-3">
             Employers & University Counselors
           </h2>
@@ -135,6 +143,7 @@ const SignIn = () => {
                 type="submit"
                 onClick={singinHandler}
                 className="commn-btn text-white border-0 mb-4 mb-md-0"
+                disabled={isButtonDisabled}
               >
                 Sign In
               </button>

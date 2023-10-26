@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import "./ResetPassword.css";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const ResetPasswordVIew = () => {
@@ -12,14 +12,13 @@ const ResetPasswordVIew = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const email = params.get("email");
-  console.log(email);
 
-  const handleResetPassword = () => {
+  const handleResetPassword = (e) => {
+    e.preventDefault();
     const requestData = {
       old_password: oldPassword,
       new_password: newPassword,
     };
-
     axios
       .post(
         `https://talengen-server.onrender.com/api/v1/users/password/change-password/${email}`,
@@ -35,7 +34,11 @@ const ResetPasswordVIew = () => {
 
   return (
     <div className="reset_wrapper align-items-center">
-      <div className="resent-content">
+      <form
+        type="submit"
+        className="resent-content"
+        onSubmit={handleResetPassword}
+      >
         <div style={{ marginTop: "207px" }}>
           <div className="text-center">
             <h2 className="fs-3 fw-semibold text-white mb-4">
@@ -57,6 +60,7 @@ const ResetPasswordVIew = () => {
                 type="password"
                 className="w-100 bg-transparent border-white"
                 name="old_password"
+                required
               />
             </div>
           </div>
@@ -72,6 +76,7 @@ const ResetPasswordVIew = () => {
                 type="password"
                 className="w-100 bg-transparent border-white"
                 name="new_password"
+                required
               />
             </div>
           </div>
@@ -82,12 +87,13 @@ const ResetPasswordVIew = () => {
             <button
               className="commn-btn mb-4 mb-md-0"
               onClick={handleResetPassword}
+              type="submit"
             >
               RESET PASSWORD
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

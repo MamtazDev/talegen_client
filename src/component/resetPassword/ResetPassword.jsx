@@ -9,7 +9,12 @@ const ResetPassword = () => {
   const [resetPassword, setResetPassword] = useState(false);
   const [email, setEmail] = useState(null);
   const navigate = useNavigate();
-  const handleResetPassword = () => {
+  const handleResetPassword = (e) => {
+    // if (email === null  ) {
+    //   alert("please provide email first")
+    // }
+
+    e.preventDefault();
     axios
       .post(
         "https://talengen-server.onrender.com/api/v1/users/forgot-password",
@@ -29,14 +34,18 @@ const ResetPassword = () => {
 
   return (
     <div className="reset_wrapper d-flex align-items-center">
-      <form className="resent-content">
+      <form
+        type="submit"
+        className="resent-content"
+        onSubmit={handleResetPassword}
+      >
         <div className="text-center">
           <h2 className="fs-3 fw-semibold text-white mb-4">
             Reset your Password
           </h2>
           <p className="fs-6 fw-semibold text-white">
             Please provide the email address that you used when you signed up
-            for your account. If you forgot your email, please{" "}
+            for your account. If you forgot your email, please
             <Link className="text-white">contact us</Link>.
           </p>
         </div>
@@ -65,7 +74,7 @@ const ResetPassword = () => {
           <div className="text-center">
             <button
               className="commn-btn mb-4 mb-md-0"
-              onClick={handleResetPassword}
+              // onClick={handleResetPassword}
               type="submit"
             >
               RESET PASSWORD

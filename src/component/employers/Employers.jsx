@@ -12,6 +12,7 @@ const Employers = () => {
   const [employeeDetails, setEmployeeDetails] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleCategoryChange = (selectedOption) => {
@@ -23,7 +24,7 @@ const Employers = () => {
   };
   const emailIsValid = /\S+@\S+\.\S+/.test(employeeDetails.email);
 
-  const singupHandler = (e) => {
+  /*     const singupHandler = (e) => {
     e.preventDefault();
     if (category === "Employer" && emailIsValid) {
       console.log("employee");
@@ -35,7 +36,40 @@ const Employers = () => {
     } else {
       alert("All information is required");
     }
+  }; */
+  const singupHandler = (e) => {
+    e.preventDefault();
+    if (
+      !employeeDetails.email ||
+      !employeeDetails.role ||
+      !employeeDetails.password ||
+      !employeeDetails.confirmPassword
+    ) {
+      alert("All information is required");
+      return;
+    }
+
+    // Check the email format
+    if (!emailIsValid) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (employeeDetails.password !== employeeDetails.confirmPassword) {
+      alert("Password do not match.");
+      return;
+    }
+    if (category === "Employer") {
+      console.log("employee");
+      localStorage.setItem("employee", JSON.stringify(employeeDetails));
+      navigate("/employesignup");
+    } else if (category === "University Counselors") {
+      localStorage.setItem("University", JSON.stringify(employeeDetails));
+      navigate("/universitycounselorsignup");
+    } else {
+      alert("Invalid category selected.");
+    }
   };
+
   return (
     <form type="submit" className="student_alumni">
       <h2 className="fs-4 fw-bold text-white mb-2">
@@ -163,13 +197,14 @@ const Employers = () => {
           </label>
           <div className="input_field mb-2">
             <input
+              required
               id="password2"
               type="password"
               className="w-100 bg-transparent border-white"
               onChange={(e) =>
                 setEmployeeDetails({
                   ...employeeDetails,
-                  password: e.target.value,
+                  confirmPassword: e.target.value,
                 })
               }
             />
