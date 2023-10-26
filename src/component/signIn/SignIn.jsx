@@ -14,8 +14,6 @@ const SignIn = () => {
   const singinHandler = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
-
-    console.log("loginSate", loginSate);
     axios
       .post(
         "https://talengen-server.onrender.com/api/v1/users/login",
@@ -129,7 +127,7 @@ const SignIn = () => {
                   type="email"
                   className="w-100 bg-transparent border-white"
                   placeholder="example@talengen.com"
-                  value={loginSate.email}
+                  // value={loginSate.email}
                 />
               </div>
             </div>
@@ -147,7 +145,7 @@ const SignIn = () => {
                   id="password2"
                   type="password"
                   className="w-100 bg-transparent border-white"
-                  value={loginSate.password}
+                  // value={loginSate.password}
                 />
               </div>
             </div>

@@ -109,6 +109,7 @@ const StudentSignup = () => {
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [selectedComponent, setSelectedComponent] = useState(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const [studentDetails, setStudentDetails] = useState({
     username: "",
@@ -118,8 +119,9 @@ const StudentSignup = () => {
     role: "Student",
     email: localStorage.getItem("student"),
   });
-  const singupHandler = () => {
-    console.log("studentDetails", studentDetails);
+  const singupHandler = (e) => {
+    e.preventDefault();
+    setIsButtonDisabled(true);
     axios
       .post(
         "https://talengen-server.onrender.com/api/v1/users/signup",
@@ -131,6 +133,9 @@ const StudentSignup = () => {
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
+      })
+      .finally(() => {
+        setIsButtonDisabled(false);
       });
   };
 
@@ -161,7 +166,7 @@ const StudentSignup = () => {
       <div className="student_alumni">
         <h2 className="fs-4 fw-bold text-white mb-2">Students & Alumni</h2>
 
-        <div>
+        <form onSubmit={(e) => singupHandler(e)}>
           <div className="sign-up p-2">
             <label htmlFor="signup" className="text-white">
               Enter your Preferred Name*
@@ -361,16 +366,15 @@ const StudentSignup = () => {
           </div>
 
           <div className="sign-up d-flex flex-wrap align-items-center justify-content-between pb-4 mb-4">
-            <button onClick={singupHandler} className="commn-btn mb-4 mb-md-0">
-              {/* <Link
-                to={"/verifyemail"}
-                className="text-decoration-none text-white"
-              > */}
+            <button
+              disabled={isButtonDisabled}
+              type="submit"
+              className="commn-btn mb-4 mb-md-0"
+            >
               Sign Up
-              {/* </Link> */}
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
