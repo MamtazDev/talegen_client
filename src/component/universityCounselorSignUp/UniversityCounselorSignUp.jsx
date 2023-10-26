@@ -66,6 +66,8 @@ const UniversityCounselorSignUp = () => {
   const navigate = useNavigate();
   const counsellor = JSON.parse(localStorage.getItem("University"));
   console.log(counsellor);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   const [uniCounsellorDetails, setUniCounsellorDetails] = useState({
     username: "",
     institution: "",
@@ -79,6 +81,7 @@ const UniversityCounselorSignUp = () => {
 
   const singupHandler = (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true);
     console.log("uniCounsellorDetails", uniCounsellorDetails);
 
     axios
@@ -94,6 +97,9 @@ const UniversityCounselorSignUp = () => {
       .catch((error) => {
         console.error("Error making POST request:", error);
         console.log(error.response);
+      })
+      .finally(() => {
+        setIsButtonDisabled(false);
       });
   };
   const handleCategoryChange = (selectedOption) => {
@@ -266,7 +272,11 @@ const UniversityCounselorSignUp = () => {
           </div>
 
           <div className="sign-up d-flex flex-wrap align-items-center justify-content-between pb-4 mb-4">
-            <button type="submit" className="commn-btn mb-4 mb-md-0">
+            <button
+              disabled={isButtonDisabled}
+              type="submit"
+              className="commn-btn mb-4 mb-md-0"
+            >
               Sign Up
             </button>
           </div>

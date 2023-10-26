@@ -7,6 +7,8 @@ import axios from "axios";
 const EmployesSignup = () => {
   const navigate = useNavigate();
   const employee = JSON.parse(localStorage.getItem("employee"));
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   const [employeeDetails, setEmployeeDetails] = useState({
     username: "",
     institution: "",
@@ -20,6 +22,7 @@ const EmployesSignup = () => {
 
   const singupHandler = (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true);
     axios
       .post(
         "https://talengen-server.onrender.com/api/v1/users/signup",
@@ -32,6 +35,9 @@ const EmployesSignup = () => {
       .catch((error) => {
         console.error("Error making POST request:", error);
         console.log(error.response);
+      })
+      .finally(() => {
+        setIsButtonDisabled(false);
       });
   };
   return (
@@ -156,7 +162,11 @@ const EmployesSignup = () => {
           </div>
 
           <div className="sign-up d-flex flex-wrap align-items-center justify-content-between pb-4 mb-4">
-            <button className="commn-btn mb-4 mb-md-0" type="submit">
+            <button
+              disabled={isButtonDisabled}
+              className="commn-btn mb-4 mb-md-0"
+              type="submit"
+            >
               Sign Up
             </button>
           </div>
