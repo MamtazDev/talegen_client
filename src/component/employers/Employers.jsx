@@ -24,32 +24,8 @@ const Employers = () => {
   };
   const emailIsValid = /\S+@\S+\.\S+/.test(employeeDetails.email);
 
-  /*     const singupHandler = (e) => {
-    e.preventDefault();
-    if (category === "Employer" && emailIsValid) {
-      console.log("employee");
-      localStorage.setItem("employee", JSON.stringify(employeeDetails));
-      navigate("/employesignup");
-    } else if (category === "University Counselors" && emailIsValid) {
-      localStorage.setItem("University", JSON.stringify(employeeDetails));
-      navigate("/universitycounselorsignup");
-    } else {
-      alert("All information is required");
-    }
-  }; */
   const singupHandler = (e) => {
     e.preventDefault();
-    if (
-      !employeeDetails.email ||
-      !employeeDetails.role ||
-      !employeeDetails.password ||
-      !employeeDetails.confirmPassword
-    ) {
-      alert("All information is required");
-      return;
-    }
-
-    // Check the email format
     if (!emailIsValid) {
       alert("Please enter a valid email address.");
       return;
@@ -71,7 +47,7 @@ const Employers = () => {
   };
 
   return (
-    <form type="submit" className="student_alumni">
+    <form onSubmit={singupHandler} className="student_alumni">
       <h2 className="fs-4 fw-bold text-white mb-2">
         Employers & University Counselors
       </h2>
@@ -105,8 +81,7 @@ const Employers = () => {
             <Select
               placeholder="Select Category"
               options={employeCategory}
-              // onChange={handleCategoryChange}
-              // value={category}
+              required
               onChange={(selectedOption) =>
                 handleCategoryChange(selectedOption)
               }
@@ -186,9 +161,6 @@ const Employers = () => {
               required
             />
           </div>
-          {/* {passwordError && (
-            <div style={{ color: "#FF4700" }}>{passwordError}</div>
-          )} */}
         </div>
 
         <div className="input_field">
@@ -215,7 +187,6 @@ const Employers = () => {
       <div className="sign-up d-flex flex-wrap align-items-center justify-content-between">
         <button
           className="commn-btn text-white border-0 mb-4 mb-md-0"
-          onClick={singupHandler}
           type="submit"
         >
           Sign Up
