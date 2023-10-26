@@ -25,6 +25,7 @@ const ResetPassword = () => {
       .then((response) => {
         console.log("POST request successful:", response);
         setResetPassword(true);
+        setEmail("");
         navigate(`/reset?email=${email}`);
       })
       .catch((error) => {
@@ -62,6 +63,7 @@ const ResetPassword = () => {
               className="w-100 bg-transparent border-white"
               placeholder="example@gmail.com"
               required
+              value={email}
             />
           </div>
         </div>

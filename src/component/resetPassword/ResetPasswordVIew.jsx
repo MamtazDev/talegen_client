@@ -26,6 +26,8 @@ const ResetPasswordVIew = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
+        setNewPassword("");
+        setOldPassword("");
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
@@ -37,7 +39,7 @@ const ResetPasswordVIew = () => {
       <form
         type="submit"
         className="resent-content"
-        onSubmit={handleResetPassword}
+        onSubmit={(e) => handleResetPassword(e)}
       >
         <div style={{ marginTop: "207px" }}>
           <div className="text-center">
@@ -61,6 +63,7 @@ const ResetPasswordVIew = () => {
                 className="w-100 bg-transparent border-white"
                 name="old_password"
                 required
+                value={oldPassword}
               />
             </div>
           </div>
@@ -77,6 +80,7 @@ const ResetPasswordVIew = () => {
                 className="w-100 bg-transparent border-white"
                 name="new_password"
                 required
+                value={newPassword}
               />
             </div>
           </div>
@@ -84,11 +88,7 @@ const ResetPasswordVIew = () => {
 
         <div>
           <div className="text-center">
-            <button
-              className="commn-btn mb-4 mb-md-0"
-              onClick={handleResetPassword}
-              type="submit"
-            >
+            <button className="commn-btn mb-4 mb-md-0" type="submit">
               RESET PASSWORD
             </button>
           </div>

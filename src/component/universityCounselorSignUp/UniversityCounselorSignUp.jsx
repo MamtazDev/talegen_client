@@ -65,7 +65,7 @@ const options = [
 const UniversityCounselorSignUp = () => {
   const navigate = useNavigate();
   const counsellor = JSON.parse(localStorage.getItem("University"));
-  console.log(counsellor)
+  console.log(counsellor);
   const [uniCounsellorDetails, setUniCounsellorDetails] = useState({
     username: "",
     institution: "",
@@ -77,11 +77,15 @@ const UniversityCounselorSignUp = () => {
     role: counsellor?.role,
   });
 
-  const singupHandler = () => {
+  const singupHandler = (e) => {
+    e.preventDefault();
     console.log("uniCounsellorDetails", uniCounsellorDetails);
 
     axios
-      .post("https://talengen-server.onrender.com/api/v1/users/signup", uniCounsellorDetails)
+      .post(
+        "https://talengen-server.onrender.com/api/v1/users/signup",
+        uniCounsellorDetails
+      )
       .then((response) => {
         console.log("POST request successful:", response);
         // navigate("/verifyemail");
@@ -111,7 +115,7 @@ const UniversityCounselorSignUp = () => {
       <div className="student_alumni">
         <h2 className="fs-4 fw-bold text-white mb-2">University Counselors</h2>
 
-        <div>
+        <form onSubmit={singupHandler}>
           <div className="sign-up p-2">
             <label htmlFor="preferredName" className="text-white">
               Enter your Preferred Name*
@@ -127,18 +131,16 @@ const UniversityCounselorSignUp = () => {
                 id="preferredName"
                 type="text"
                 className="w-100 bg-transparent border-white"
+                required
               />
             </div>
             <div className="input_field mb-2">
               <label htmlFor="currentCompany" className=" fs-6 text-white">
                 Enter your Current Institution Name*
               </label>
-              {/* <div className='input_field mb-2'>
-                                <input id='currentCompany' type="text" className='w-100 bg-transparent border-white' />
-                            </div> */}
               <div className="input_field mb-2">
                 <Select
-                  //   onChange={handleCategoryChange}
+                  required
                   onChange={(selectedOption) =>
                     handleCategoryChange(selectedOption)
                   }
@@ -217,6 +219,7 @@ const UniversityCounselorSignUp = () => {
                   id="currentPosition"
                   type="text"
                   className="w-100 bg-transparent border-white"
+                  required
                 />
               </div>
             </div>
@@ -236,6 +239,7 @@ const UniversityCounselorSignUp = () => {
                   id="preferredContact"
                   type="number"
                   className="w-100 bg-transparent border-white"
+                  required
                 />
               </div>
             </div>
@@ -255,19 +259,18 @@ const UniversityCounselorSignUp = () => {
                   id="registrationNumber"
                   type="number"
                   className="w-100 bg-transparent border-white"
+                  required
                 />
               </div>
             </div>
           </div>
 
           <div className="sign-up d-flex flex-wrap align-items-center justify-content-between pb-4 mb-4">
-            <button onClick={singupHandler} className="commn-btn mb-4 mb-md-0">
-              {/* <Link to={'/verifyemail'} className='text-decoration-none text-white'> */}
+            <button type="submit" className="commn-btn mb-4 mb-md-0">
               Sign Up
-              {/* </Link> */}
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

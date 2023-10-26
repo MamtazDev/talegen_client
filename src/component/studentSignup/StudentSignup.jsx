@@ -106,7 +106,6 @@ const options2 = [
 ];
 
 const StudentSignup = () => {
-  // api integration
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -119,7 +118,6 @@ const StudentSignup = () => {
     role: "Student",
     email: localStorage.getItem("student"),
   });
-
   const singupHandler = () => {
     console.log("studentDetails", studentDetails);
     axios
@@ -129,7 +127,6 @@ const StudentSignup = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
-        // navigate("/verifyemail");
         navigate(`/verifyemail?email=${studentDetails.email}`);
       })
       .catch((error) => {

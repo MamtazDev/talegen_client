@@ -18,7 +18,8 @@ const EmployesSignup = () => {
     role: employee?.role,
   });
 
-  const singupHandler = () => {
+  const singupHandler = (e) => {
+    e.preventDefault();
     axios
       .post(
         "https://talengen-server.onrender.com/api/v1/users/signup",
@@ -26,7 +27,6 @@ const EmployesSignup = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
-        // navigate("/verifyemail");
         navigate(`/verifyemail?email=${employeeDetails.email}`);
       })
       .catch((error) => {
@@ -46,14 +46,15 @@ const EmployesSignup = () => {
       <div className="student_alumni">
         <h2 className="fs-4 fw-bold text-white mb-2">Employers</h2>
 
-        <div>
+        <form onSubmit={(e) => singupHandler(e)}>
           <div className="sign-up p-2">
             <label htmlFor="preferredName" className="text-white mb-2">
               Enter your Preferred Name*
             </label>
             <div className="input_field mb-2">
               <input
-                onBlur={(e) =>
+                required
+                onChange={(e) =>
                   setEmployeeDetails({
                     ...employeeDetails,
                     username: e.target.value,
@@ -70,7 +71,8 @@ const EmployesSignup = () => {
               </label>
               <div className="input_field mb-2">
                 <input
-                  onBlur={(e) =>
+                  required
+                  onChange={(e) =>
                     setEmployeeDetails({
                       ...employeeDetails,
                       institution: e.target.value,
@@ -92,7 +94,8 @@ const EmployesSignup = () => {
               </label>
               <div className="input_field mb-2">
                 <input
-                  onBlur={(e) =>
+                  required
+                  onChange={(e) =>
                     setEmployeeDetails({
                       ...employeeDetails,
                       currentPosition: e.target.value,
@@ -114,7 +117,7 @@ const EmployesSignup = () => {
               </label>
               <div className="input_field mb-2">
                 <input
-                  onBlur={(e) =>
+                  onChange={(e) =>
                     setEmployeeDetails({
                       ...employeeDetails,
                       contact: e.target.value,
@@ -123,6 +126,7 @@ const EmployesSignup = () => {
                   id="preferredContact"
                   type="number"
                   className="w-100 bg-transparent border-white"
+                  required
                 />
               </div>
             </div>
@@ -136,7 +140,7 @@ const EmployesSignup = () => {
               </label>
               <div className="input_field mb-2">
                 <input
-                  onBlur={(e) =>
+                  onChange={(e) =>
                     setEmployeeDetails({
                       ...employeeDetails,
                       registrationNumber: e.target.value,
@@ -144,6 +148,7 @@ const EmployesSignup = () => {
                   }
                   id="registrationNumber"
                   type="number"
+                  required
                   className="w-100 bg-transparent border-white"
                 />
               </div>
@@ -151,11 +156,11 @@ const EmployesSignup = () => {
           </div>
 
           <div className="sign-up d-flex flex-wrap align-items-center justify-content-between pb-4 mb-4">
-            <button className="commn-btn mb-4 mb-md-0" onClick={singupHandler}>
+            <button className="commn-btn mb-4 mb-md-0" type="submit">
               Sign Up
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
