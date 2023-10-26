@@ -13,7 +13,10 @@ const SignIn = () => {
   const singinHandler = () => {
     console.log("loginSate", loginSate);
     axios
-      .post("https://talengen-server.onrender.com/api/v1/users/login", loginSate)
+      .post(
+        "https://talengen-server.onrender.com/api/v1/users/login",
+        loginSate
+      )
       .then((response) => {
         console.log("Logged in successfull", response);
       })
@@ -34,7 +37,7 @@ const SignIn = () => {
           </p>
         </div>
 
-        <div>
+        <form>
           <div className="sign-up p-2">
             <label htmlFor="studentEmail" className="text-white">
               Enter your Student Email*
@@ -57,6 +60,7 @@ const SignIn = () => {
               </label>
               <div className="input_field mb-2">
                 <input
+                  required
                   onBlur={(e) =>
                     setLoginState({ ...loginSate, password: e.target.value })
                   }
@@ -69,7 +73,11 @@ const SignIn = () => {
           </div>
 
           <div className="sign-up d-flex flex-wrap align-items-center justify-content-between border-bottom pb-4 mb-4">
-            <button className="commn-btn mb-4 mb-md-0" onClick={singinHandler}>
+            <button
+              type="submit"
+              className="commn-btn mb-4 mb-md-0"
+              onClick={singinHandler}
+            >
               Sign In
             </button>
             <Link
@@ -79,9 +87,9 @@ const SignIn = () => {
               Forgot your password?
             </Link>
           </div>
-        </div>
+        </form>
 
-        <div className="student_alumni">
+        <form className="student_alumni">
           <h2 className="fs-4 fw-bold text-white mb-3">
             Employers & University Counselors
           </h2>
@@ -93,6 +101,7 @@ const SignIn = () => {
               </label>
               <div className="input_field mb-2">
                 <input
+                  required
                   onChange={(e) =>
                     setLoginState({ ...loginSate, email: e.target.value })
                   }
@@ -110,11 +119,12 @@ const SignIn = () => {
               </label>
               <div className="input_field mb-2">
                 <input
+                  required
                   onChange={(e) =>
                     setLoginState({ ...loginSate, password: e.target.value })
                   }
                   id="password2"
-                  type="text"
+                  type="password"
                   className="w-100 bg-transparent border-white"
                 />
               </div>
@@ -122,6 +132,7 @@ const SignIn = () => {
 
             <div className="sign-up d-flex flex-wrap align-items-center justify-content-between">
               <button
+                type="submit"
                 onClick={singinHandler}
                 className="commn-btn text-white border-0 mb-4 mb-md-0"
               >
@@ -135,7 +146,7 @@ const SignIn = () => {
               </Link>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

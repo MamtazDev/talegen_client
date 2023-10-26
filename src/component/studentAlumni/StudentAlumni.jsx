@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const StudentAlumni = () => {
-
   const [email, setEmail] = useState(null);
   const navigate = useNavigate();
 
@@ -12,9 +11,8 @@ const StudentAlumni = () => {
     if (emailIsValid) {
       localStorage.setItem("student", email);
       navigate("/studentsignup");
-    } else {
-      alert("Please enter a valid email address.");
     }
+    
   };
 
   return (
@@ -39,10 +37,7 @@ const StudentAlumni = () => {
       </div>
 
       <div className="sign-up d-flex flex-wrap align-items-center justify-content-between border-bottom pb-4 mb-4">
-        <button
-          className="commn-btn mb-4 mb-md-0"
-          onClick={singupHandler} // Handle sign-up click
-        >
+        <button type="submit" className="commn-btn mb-4 mb-md-0" onClick={singupHandler}>
           Sign Up
         </button>
         <Link to={"/signin"} className=" text-decoration-none text-white">

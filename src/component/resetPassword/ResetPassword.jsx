@@ -11,9 +11,12 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const handleResetPassword = () => {
     axios
-      .post("https://talengen-server.onrender.com/api/v1/users/forgot-password", {
-        email: email,
-      })
+      .post(
+        "https://talengen-server.onrender.com/api/v1/users/forgot-password",
+        {
+          email: email,
+        }
+      )
       .then((response) => {
         console.log("POST request successful:", response);
         setResetPassword(true);
@@ -26,7 +29,7 @@ const ResetPassword = () => {
 
   return (
     <div className="reset_wrapper d-flex align-items-center">
-      <div className="resent-content">
+      <form className="resent-content">
         <div className="text-center">
           <h2 className="fs-3 fw-semibold text-white mb-4">
             Reset your Password
@@ -63,12 +66,13 @@ const ResetPassword = () => {
             <button
               className="commn-btn mb-4 mb-md-0"
               onClick={handleResetPassword}
+              type="submit"
             >
               RESET PASSWORD
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

@@ -26,7 +26,8 @@ const EmployesSignup = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
-        navigate("/verifyemail");
+        // navigate("/verifyemail");
+        navigate(`/verifyemail?email=${employeeDetails.email}`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
@@ -65,7 +66,7 @@ const EmployesSignup = () => {
             </div>
             <div className="input_field mb-2">
               <label htmlFor="currentCompany" className=" fs-6 text-white mb-2">
-                Enter your Current Company/Institution Name*
+                Enter your Current Company Name*
               </label>
               <div className="input_field mb-2">
                 <input
@@ -131,7 +132,7 @@ const EmployesSignup = () => {
                 htmlFor="registrationNumber"
                 className=" fs-6 text-white mb-2"
               >
-                Enter your Company/Institution Registration Number*
+                Enter your Company Registration Number*
               </label>
               <div className="input_field mb-2">
                 <input

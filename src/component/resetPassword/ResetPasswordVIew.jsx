@@ -12,7 +12,7 @@ const ResetPasswordVIew = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const email = params.get("email");
-  console.log(email)
+  console.log(email);
 
   const handleResetPassword = () => {
     const requestData = {
@@ -42,7 +42,7 @@ const ResetPasswordVIew = () => {
               Reset your Password
             </h2>
             <p className="fs-6 fw-semibold text-white">
-              Enter a new password for account: example@gmail.com
+              Enter a new password for account: {email}
             </p>
           </div>
 

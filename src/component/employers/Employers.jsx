@@ -32,10 +32,12 @@ const Employers = () => {
     } else if (category === "University Counselors" && emailIsValid) {
       localStorage.setItem("University", JSON.stringify(employeeDetails));
       navigate("/universitycounselorsignup");
+    } else {
+      alert("All information is required");
     }
   };
   return (
-    <form className="student_alumni">
+    <form type="submit" className="student_alumni">
       <h2 className="fs-4 fw-bold text-white mb-2">
         Employers & University Counselors
       </h2>

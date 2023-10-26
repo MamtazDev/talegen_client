@@ -84,7 +84,8 @@ const UniversityCounselorSignUp = () => {
       .post("https://talengen-server.onrender.com/api/v1/users/signup", uniCounsellorDetails)
       .then((response) => {
         console.log("POST request successful:", response);
-        navigate("/verifyemail");
+        // navigate("/verifyemail");
+        navigate(`/verifyemail?email=${uniCounsellorDetails.email}`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
