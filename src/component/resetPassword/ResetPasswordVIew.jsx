@@ -98,7 +98,13 @@ const ResetPasswordVIew = () => {
               className="commn-btn mb-4 mb-md-0"
               type="submit"
             >
-              RESET PASSWORD
+              {isButtonDisabled ? (
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                "RESET PASSWORD"
+              )}
             </button>
           </div>
         </div>

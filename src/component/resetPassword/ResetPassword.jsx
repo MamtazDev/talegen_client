@@ -25,7 +25,7 @@ const ResetPassword = () => {
         console.log("POST request successful:", response);
         setResetPassword(true);
         setEmail("");
-        navigate('/verifyEmail');
+        navigate("/verifyEmail");
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
@@ -81,7 +81,13 @@ const ResetPassword = () => {
               disabled={isButtonDisabled}
               type="submit"
             >
-              RESET PASSWORD
+              {isButtonDisabled ? (
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                "RESET PASSWORD"
+              )}
             </button>
           </div>
         </div>
