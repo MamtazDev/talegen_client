@@ -8,6 +8,9 @@ const VerifyEmail = () => {
   const email = searchParams.get("email");
   console.log(email);
 
+
+
+  
   return (
     <div className="reset_wrapper">
       <div style={{ marginTop: "200px" }}>

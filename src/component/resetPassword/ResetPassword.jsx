@@ -48,8 +48,8 @@ const ResetPassword = () => {
           </h2>
           <p className="fs-6 fw-semibold text-white">
             Please provide the email address that you used when you signed up
-            for your account. If you forgot your email, please
-            <Link className="text-white">contact us</Link>.
+            for your account. If you forgot your email, please  
+            <Link className="text-white ms-1" to="/"> contact us</Link>.
           </p>
         </div>
 
