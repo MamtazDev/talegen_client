@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import TeleGenLogo from "../../assets/telegen_logo.svg";
 import { Image } from "react-bootstrap";
 import { useState } from "react";
@@ -14,10 +14,8 @@ const VerifyEmail = () => {
   console.log(email);
   console.log(reset);
   console.log(signup);
-
-  const [resetPassword, setResetPassword] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
+  const navigate = useNavigate();
   const handleResetPassword = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
@@ -32,6 +30,7 @@ const VerifyEmail = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
+        navigate("/verifysuccess");
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
@@ -73,8 +72,15 @@ const VerifyEmail = () => {
               to={"/verifysuccess"}
               className="text-decoration-none text-white"
             > */}
-            RESEND VERIFICATION EMAIL
+
             {/* </Link> */}
+            {isButtonDisabled ? (
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              " RESEND VERIFICATION EMAIL"
+            )}
           </button>
         </div>
       </div>

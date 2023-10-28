@@ -300,7 +300,6 @@ const StudentSignup = () => {
               <div className="input_field mb-2">
                 <Select
                   required
-                  //   onChange={handleCategoryChange}
                   onChange={(selectedOption) =>
                     handleCategoryChange(selectedOption, "graduationSelect")
                   }
