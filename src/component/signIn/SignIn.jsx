@@ -9,8 +9,14 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const [loginSate1, setLoginState1] = useState({
+    email: "",
+    password: "",
+  });
   // eslint-disable-next-line no-unused-vars
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isButtonDisabled1, setIsButtonDisabled1] = useState(false);
+
   const singinHandler = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
@@ -31,6 +37,28 @@ const SignIn = () => {
           password: "",
         });
         setIsButtonDisabled(false);
+      });
+  };
+  const singinHandler1 = (e) => {
+    e.preventDefault();
+    setIsButtonDisabled1(true);
+    axios
+      .post(
+        "https://talengen-server.onrender.com/api/v1/users/login",
+        loginSate1
+      )
+      .then((response) => {
+        console.log("Logged in successfully", response);
+      })
+      .catch((error) => {
+        console.error("Error making POST request:", error);
+      })
+      .finally(() => {
+        setLoginState({
+          email: "",
+          password: "",
+        });
+        setIsButtonDisabled1(false);
       });
   };
 
@@ -88,7 +116,13 @@ const SignIn = () => {
               className="commn-btn mb-4 mb-md-0"
               disabled={isButtonDisabled}
             >
-              Sign In
+              {isButtonDisabled ? (
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                "Sign In"
+              )}
             </button>
             <Link
               to={"/resetpassword"}
@@ -106,7 +140,7 @@ const SignIn = () => {
         <form
           type="submit"
           className="student_alumni"
-          onSubmit={(e) => singinHandler(e)}
+          onSubmit={(e) => singinHandler1(e)}
         >
           <h2 className="fs-4 fw-bold text-white mb-3">
             Employers & University Counselors
@@ -121,13 +155,13 @@ const SignIn = () => {
                 <input
                   required
                   onChange={(e) =>
-                    setLoginState({ ...loginSate, email: e.target.value })
+                    setLoginState1({ ...loginSate1, email: e.target.value })
                   }
                   id="workEmail"
                   type="email"
                   className="w-100 bg-transparent border-white"
                   placeholder="example@talengen.com"
-                  // value={loginSate.email}
+                  value={loginSate1.email}
                 />
               </div>
             </div>
@@ -140,12 +174,12 @@ const SignIn = () => {
                 <input
                   required
                   onChange={(e) =>
-                    setLoginState({ ...loginSate, password: e.target.value })
+                    setLoginState1({ ...loginSate1, password: e.target.value })
                   }
                   id="password2"
                   type="password"
                   className="w-100 bg-transparent border-white"
-                  // value={loginSate.password}
+                  value={loginSate1.password}
                 />
               </div>
             </div>
@@ -154,9 +188,15 @@ const SignIn = () => {
               <button
                 type="submit"
                 className="commn-btn text-white border-0 mb-4 mb-md-0"
-                disabled={isButtonDisabled}
+                disabled={isButtonDisabled1}
               >
-                Sign In
+                {isButtonDisabled1 ? (
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  "Sign In"
+                )}
               </button>
               <Link
                 to={"/resetpassword"}

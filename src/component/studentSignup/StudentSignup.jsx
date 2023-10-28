@@ -371,7 +371,13 @@ const StudentSignup = () => {
               type="submit"
               className="commn-btn mb-4 mb-md-0"
             >
-              Sign Up
+              {isButtonDisabled ? (
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                "Sign Up"
+              )}
             </button>
           </div>
         </form>

@@ -1,12 +1,14 @@
-import  { useState } from "react";
+import { useState } from "react";
 import TeleGenLogo from "../../assets/telegen_logo.svg";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import axios from "axios";
 
 const UniversitySignup = () => {
   const navigate = useNavigate();
   const employee = JSON.parse(localStorage.getItem("employe"));
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   const [employeeDetails, setEmployeeDetails] = useState({
     username: "",
     institude: "",
@@ -19,7 +21,7 @@ const UniversitySignup = () => {
 
   const singupHandler = () => {
     console.log("EmployeeDetails", employeeDetails);
-
+    setIsButtonDisabled(true);
     axios
       .post(
         "https://talengen-server.onrender.com/api/v1/users/signup",
@@ -30,13 +32,10 @@ const UniversitySignup = () => {
         console.log("POST request successful:", response);
       })
       .catch((error) => {
-        // Handle any errors that occurred during the POST request
-        // Handle any errors that occurred during the POST request
         console.error("Error making POST request:", error);
       });
 
     navigate(`/verifyemail?email=${employeeDetails.email}`);
-    // navigate('/verifyemail');
   };
 
   return (
@@ -162,7 +161,13 @@ const UniversitySignup = () => {
           <div className="sign-up d-flex flex-wrap align-items-center justify-content-between pb-4 mb-4">
             <button className="commn-btn mb-4 mb-md-0" onClick={singupHandler}>
               {/* <Link to={'/verifyemail'} className='text-decoration-none text-white'> */}
-              Sign Up
+              {isButtonDisabled ? (
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                "Sign Up"
+              )}
               {/* </Link> */}
             </button>
           </div>
