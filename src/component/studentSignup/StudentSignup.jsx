@@ -129,7 +129,7 @@ const StudentSignup = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
-        navigate(`/verifyemail?email=${studentDetails.email}`);
+        navigate(`/verifyemail?email=${studentDetails.email}&signup=true`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);

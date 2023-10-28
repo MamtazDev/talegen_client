@@ -1,16 +1,46 @@
+/* eslint-disable no-unused-vars */
 import { Link, useLocation } from "react-router-dom";
 import TeleGenLogo from "../../assets/telegen_logo.svg";
 import { Image } from "react-bootstrap";
+import { useState } from "react";
+import axios from "axios";
 
 const VerifyEmail = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const email = searchParams.get("email");
+  const reset = searchParams.get("reset");
+  const signup = searchParams.get("signup");
   console.log(email);
+  console.log(reset);
+  console.log(signup);
 
+  const [resetPassword, setResetPassword] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+  const handleResetPassword = (e) => {
+    e.preventDefault();
+    setIsButtonDisabled(true);
+    axios
+      .post(
+        `https://talengen-server.onrender.com/api/v1/users/${
+          signup ? "resend-register" : reset ? "resend-reset" : ""
+        }`,
+        {
+          email,
+        }
+      )
+      .then((response) => {
+        console.log("POST request successful:", response);
+      })
+      .catch((error) => {
+        console.error("Error making POST request:", error);
+      })
+      .finally(() => {
+        setIsButtonDisabled(false);
+      });
+  };
 
-  
   return (
     <div className="reset_wrapper">
       <div style={{ marginTop: "200px" }}>
@@ -29,19 +59,22 @@ const VerifyEmail = () => {
         </div>
 
         <p className="fs-6 fw-normal text-white text-center">
-          An email has been sent to {email} with a link to verify your
-          account. If you have not received the email after a few minutes,
-          please check your spam folder.
+          An email has been sent to {email} with a link to verify your account.
+          If you have not received the email after a few minutes, please check
+          your spam folder.
         </p>
 
         <div className="text-center">
-          <button className="commn-btn mb-4 mb-md-0">
-            <Link
+          <button
+            onClick={handleResetPassword}
+            className="commn-btn mb-4 mb-md-0"
+          >
+            {/* <Link
               to={"/verifysuccess"}
               className="text-decoration-none text-white"
-            >
-              RESEND VERIFICATION EMAIL
-            </Link>
+            > */}
+            RESEND VERIFICATION EMAIL
+            {/* </Link> */}
           </button>
         </div>
       </div>

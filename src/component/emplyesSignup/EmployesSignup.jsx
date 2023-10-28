@@ -30,7 +30,7 @@ const EmployesSignup = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
-        navigate(`/verifyemail?email=${employeeDetails.email}`);
+        navigate(`/verifyemail?email=${employeeDetails.email}&signup=true`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);

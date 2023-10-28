@@ -91,8 +91,9 @@ const UniversityCounselorSignUp = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
-        // navigate("/verifyemail");
-        navigate(`/verifyemail?email=${uniCounsellorDetails.email}`);
+        navigate(
+          `/verifyemail?email=${uniCounsellorDetails.email}&signup=true`
+        );
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
