@@ -13,6 +13,7 @@ import VerifyEmail from "./component/verifyEmail/VerifyEmail";
 import VerifySuccess from "./component/verifySuccess/VerifySuccess";
 import UniversityCounselorSignUp from "./component/universityCounselorSignUp/UniversityCounselorSignUp";
 import ResetPasswordVIew from "./component/resetPassword/ResetPasswordVIew";
+import VeryfyResetEmail from "./component/verifyEmail/VeryfyResetEmail";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/verifyemail",
     element: <VerifyEmail />,
+  },
+  {
+    path: "/verifyResetEmail",
+    element: <VeryfyResetEmail />,
   },
 
   {

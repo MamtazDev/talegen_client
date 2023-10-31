@@ -25,7 +25,7 @@ const ResetPassword = () => {
         console.log("POST request successful:", response);
         setResetPassword(true);
         setEmail("");
-        navigate(`/verifyemail?email=${email}&reset=true`);
+        navigate(`/verifyResetEmail?email=${email}&reset=true`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);

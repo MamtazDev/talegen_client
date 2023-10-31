@@ -74,6 +74,10 @@ const SignIn = () => {
         </div>
 
         <form onSubmit={(e) => singinHandler(e)}>
+        <h2 className="fs-4 fw-bold text-white mb-3">
+           Students
+          </h2>
+
           <div className="sign-up p-2">
             <label htmlFor="studentEmail" className="text-white">
               Enter your Student Email*
