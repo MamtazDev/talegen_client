@@ -3,6 +3,7 @@ import TeleGenLogo from "../../assets/telegen_logo.svg";
 import { useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const EmployesSignup = () => {
   const navigate = useNavigate();
@@ -30,11 +31,19 @@ const EmployesSignup = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
+        Swal.fire(
+          'Verify Your Email Address',
+        )
         navigate(`/verifyemail?email=${employeeDetails.email}&signup=true`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
         console.log(error.response);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       })
       .finally(() => {
         setIsButtonDisabled(false);

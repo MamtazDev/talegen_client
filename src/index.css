@@ -77,3 +77,9 @@ select:focus-visible {
     justify-content: center;
     align-items: center;
 }
+
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+    box-shadow: none !important;
+    background-color: #5d110f !important;
+}

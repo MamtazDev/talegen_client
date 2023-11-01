@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./ResetPassword.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const ResetPassword = () => {
   // eslint-disable-next-line no-unused-vars
@@ -25,10 +26,18 @@ const ResetPassword = () => {
         console.log("POST request successful:", response);
         setResetPassword(true);
         setEmail("");
+        Swal.fire(
+          'Verify Your Email Address',
+        )
         navigate(`/verifyResetEmail?email=${email}&reset=true`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       })
       .finally(() => {
         setIsButtonDisabled(false);

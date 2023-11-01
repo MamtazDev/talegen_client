@@ -3,6 +3,7 @@ import TeleGenLogo from "../../assets/telegen_logo.svg";
 import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const [loginSate, setLoginState] = useState({
@@ -27,9 +28,18 @@ const SignIn = () => {
       )
       .then((response) => {
         console.log("Logged in successfully", response);
+        Swal.fire(
+          'Student Login',
+          'Success'
+        )
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       })
       .finally(() => {
         setLoginState({
@@ -49,9 +59,18 @@ const SignIn = () => {
       )
       .then((response) => {
         console.log("Logged in successfully", response);
+        Swal.fire(
+          'Student Login',
+          'Success'
+        )
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       })
       .finally(() => {
         setLoginState({
@@ -74,8 +93,8 @@ const SignIn = () => {
         </div>
 
         <form onSubmit={(e) => singinHandler(e)}>
-        <h2 className="fs-4 fw-bold text-white mb-3">
-           Students
+          <h2 className="fs-4 fw-bold text-white mb-3">
+            Students
           </h2>
 
           <div className="sign-up p-2">

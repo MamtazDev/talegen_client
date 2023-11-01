@@ -4,6 +4,7 @@ import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
+import Swal from "sweetalert2";
 const options = [
   { value: "(UM)", label: "University Malaya(UM)" },
   { value: "(USM)", label: "Universiti Sains Malaysia(USM)" },
@@ -91,6 +92,9 @@ const UniversityCounselorSignUp = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
+        Swal.fire(
+          'Verify Your Email Address',
+        )
         navigate(
           `/verifyemail?email=${uniCounsellorDetails.email}&signup=true`
         );
@@ -98,6 +102,11 @@ const UniversityCounselorSignUp = () => {
       .catch((error) => {
         console.error("Error making POST request:", error);
         console.log(error.response);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       })
       .finally(() => {
         setIsButtonDisabled(false);

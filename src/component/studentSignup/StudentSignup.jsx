@@ -4,6 +4,7 @@ import { Image } from "react-bootstrap";
 import Select from "react-select";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const options = [
   { value: "(UM)", label: "University Malaya(UM)" },
@@ -129,10 +130,18 @@ const StudentSignup = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
+        Swal.fire(
+          'Signup Success',
+        )
         navigate(`/verifyemail?email=${studentDetails.email}&signup=true`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       })
       .finally(() => {
         setIsButtonDisabled(false);
