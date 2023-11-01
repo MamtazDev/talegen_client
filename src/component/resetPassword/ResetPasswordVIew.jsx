@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./ResetPassword.css";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const ResetPasswordVIew = () => {
   // eslint-disable-next-line no-unused-vars
@@ -27,12 +28,20 @@ const ResetPasswordVIew = () => {
         requestData
       )
       .then((response) => {
-        console.log("POST request successful:", response);
         setNewPassword("");
         setOldPassword("");
+        console.log("POST request successful:", response);
+        Swal.fire(
+          'Success',
+        )
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       })
       .finally(() => {
         setIsButtonDisabled(false);

@@ -29,8 +29,7 @@ const SignIn = () => {
       .then((response) => {
         console.log("Logged in successfully", response);
         Swal.fire(
-          'Student Login',
-          'Success'
+          'Login Success',
         )
       })
       .catch((error) => {
@@ -60,8 +59,7 @@ const SignIn = () => {
       .then((response) => {
         console.log("Logged in successfully", response);
         Swal.fire(
-          'Student Login',
-          'Success'
+          'Login Success',
         )
       })
       .catch((error) => {
