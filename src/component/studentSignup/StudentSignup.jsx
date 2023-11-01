@@ -131,7 +131,7 @@ const StudentSignup = () => {
       .then((response) => {
         console.log("POST request successful:", response);
         Swal.fire(
-          'Signup Success',
+          'Verify Your Email Address',
         )
         navigate(`/verifyemail?email=${studentDetails.email}&signup=true`);
       })
