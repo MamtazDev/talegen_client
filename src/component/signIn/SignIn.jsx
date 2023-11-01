@@ -4,6 +4,7 @@ import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import serverLink from "../../../config";
 
 const SignIn = () => {
   const [loginSate, setLoginState] = useState({
@@ -17,13 +18,13 @@ const SignIn = () => {
   // eslint-disable-next-line no-unused-vars
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isButtonDisabled1, setIsButtonDisabled1] = useState(false);
-
+  const url =serverLink
   const singinHandler = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
     axios
       .post(
-        "https://talengen-server.onrender.com/api/v1/users/login",
+        `${url}/api/v1/users/login`,
         loginSate
       )
       .then((response) => {
@@ -53,7 +54,7 @@ const SignIn = () => {
     setIsButtonDisabled1(true);
     axios
       .post(
-        "https://talengen-server.onrender.com/api/v1/users/login",
+        `${url}/api/v1/users/login`,
         loginSate1
       )
       .then((response) => {

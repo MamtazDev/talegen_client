@@ -31,4 +31,4 @@ const VerifySuccess = () => {
     )
 }
 
-export default VerifySuccess
+export default VerifySuccess;

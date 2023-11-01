@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
 import Swal from "sweetalert2";
+import serverLink from "../../../config";
 const options = [
   { value: "(UM)", label: "University Malaya(UM)" },
   { value: "(USM)", label: "Universiti Sains Malaysia(USM)" },
@@ -68,7 +69,7 @@ const UniversityCounselorSignUp = () => {
   const counsellor = JSON.parse(localStorage.getItem("University"));
   console.log(counsellor);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
+  const url =serverLink
   const [uniCounsellorDetails, setUniCounsellorDetails] = useState({
     username: "",
     institution: "",
@@ -87,7 +88,7 @@ const UniversityCounselorSignUp = () => {
 
     axios
       .post(
-        "https://talengen-server.onrender.com/api/v1/users/signup",
+        ```${url}/api/v1/users/signup`,
         uniCounsellorDetails
       )
       .then((response) => {

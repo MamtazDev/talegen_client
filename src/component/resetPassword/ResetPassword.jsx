@@ -4,6 +4,7 @@ import "./ResetPassword.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import serverLink from "../../../config";
 
 const ResetPassword = () => {
   // eslint-disable-next-line no-unused-vars
@@ -11,13 +12,13 @@ const ResetPassword = () => {
   const [email, setEmail] = useState(null);
   const navigate = useNavigate();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
+  const url =serverLink
   const handleResetPassword = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
     axios
       .post(
-        "https://talengen-server.onrender.com/api/v1/users/forgot-password",
+        `${url}/api/v1/users/forgot-password`,
         {
           email: email,
         }

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
+import serverLink from "../../../config";
 
 const EmployesSignup = () => {
   const navigate = useNavigate();
@@ -20,30 +21,26 @@ const EmployesSignup = () => {
     password: employee?.password,
     role: employee?.role,
   });
+  const url = serverLink;
 
   const singupHandler = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
     axios
-      .post(
-        "https://talengen-server.onrender.com/api/v1/users/signup",
-        employeeDetails
-      )
+      .post(`${url}/api/v1/users/signup`, employeeDetails)
       .then((response) => {
         console.log("POST request successful:", response);
-        Swal.fire(
-          'Verify Your Email Address',
-        )
+        Swal.fire("Verify Your Email Address");
         navigate(`/verifyemail?email=${employeeDetails.email}&signup=true`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
         console.log(error.response);
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        })
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       })
       .finally(() => {
         setIsButtonDisabled(false);

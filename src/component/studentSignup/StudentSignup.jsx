@@ -5,6 +5,7 @@ import Select from "react-select";
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import serverLink from "../../../config";
 
 const options = [
   { value: "(UM)", label: "University Malaya(UM)" },
@@ -120,28 +121,24 @@ const StudentSignup = () => {
     role: "Student",
     email: localStorage.getItem("student"),
   });
+  const url = serverLink;
   const singupHandler = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
     axios
-      .post(
-        "https://talengen-server.onrender.com/api/v1/users/signup",
-        studentDetails
-      )
+      .post(`${url}/api/v1/users/signup`, studentDetails)
       .then((response) => {
         console.log("POST request successful:", response);
-        Swal.fire(
-          'Verify Your Email Address',
-        )
+        Swal.fire("Verify Your Email Address");
         navigate(`/verifyemail?email=${studentDetails.email}&signup=true`);
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        })
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       })
       .finally(() => {
         setIsButtonDisabled(false);

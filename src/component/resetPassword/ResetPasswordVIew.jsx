@@ -4,6 +4,7 @@ import "./ResetPassword.css";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import serverLink from "../../../config";
 
 const ResetPasswordVIew = () => {
   // eslint-disable-next-line no-unused-vars
@@ -14,7 +15,7 @@ const ResetPasswordVIew = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const email = params.get("email");
-
+  const url = serverLink;
   const handleResetPassword = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
@@ -24,24 +25,22 @@ const ResetPasswordVIew = () => {
     };
     axios
       .post(
-        `https://talengen-server.onrender.com/api/v1/users/password/change-password/${email}`,
+        `${url}/api/v1/users/password/change-password/${email}`,
         requestData
       )
       .then((response) => {
         setNewPassword("");
         setOldPassword("");
         console.log("POST request successful:", response);
-        Swal.fire(
-          'Success',
-        )
+        Swal.fire("Success");
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        })
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       })
       .finally(() => {
         setIsButtonDisabled(false);

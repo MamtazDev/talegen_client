@@ -3,6 +3,7 @@ import TeleGenLogo from "../../assets/telegen_logo.svg";
 import { useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import axios from "axios";
+import serverLink from "./../../../config";
 
 const UniversitySignup = () => {
   const navigate = useNavigate();
@@ -18,17 +19,13 @@ const UniversitySignup = () => {
     email: employee.email,
     password: employee.password,
   });
-
+  const url = serverLink;
   const singupHandler = () => {
     console.log("EmployeeDetails", employeeDetails);
     setIsButtonDisabled(true);
     axios
-      .post(
-        "https://talengen-server.onrender.com/api/v1/users/signup",
-        employeeDetails
-      )
+      .post(`${url}/api/v1/users/signup`, employeeDetails)
       .then((response) => {
-        // Handle the successful response here
         console.log("POST request successful:", response);
       })
       .catch((error) => {

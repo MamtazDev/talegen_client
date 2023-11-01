@@ -4,6 +4,7 @@ import TeleGenLogo from "../../assets/telegen_logo.svg";
 import { Image } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
+import serverLink from './../../../config';
 
 const VerifyEmail = () => {
   const location = useLocation();
@@ -16,12 +17,13 @@ const VerifyEmail = () => {
   console.log(signup);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
+  const url =serverLink
   const handleResetPassword = (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
     axios
       .post(
-        `https://talengen-server.onrender.com/api/v1/users/${
+        `${url}/api/v1/users/${
           signup ? "resend-register" : reset ? "resend-reset" : ""
         }`,
         {
@@ -30,7 +32,7 @@ const VerifyEmail = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
-        navigate("/verifysuccess");
+        navigate("/");
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
