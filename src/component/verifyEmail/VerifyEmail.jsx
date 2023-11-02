@@ -32,7 +32,8 @@ const VerifyEmail = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
-        navigate("/");
+        // navigate("/");
+        alert("Successfully send again, check your mail.")
       })
       .catch((error) => {
         console.error("Error making POST request:", error);
@@ -81,7 +82,7 @@ const VerifyEmail = () => {
                 <span className="visually-hidden">Loading...</span>
               </div>
             ) : (
-              " RESEND VERIFICATION EMAIL"
+              "RESEND VERIFICATION EMAIL"
             )}
           </button>
         </div>

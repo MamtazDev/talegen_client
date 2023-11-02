@@ -88,7 +88,7 @@ const UniversityCounselorSignUp = () => {
 
     axios
       .post(
-        ```${url}/api/v1/users/signup`,
+        `${url}/api/v1/users/signup`,
         uniCounsellorDetails
       )
       .then((response) => {

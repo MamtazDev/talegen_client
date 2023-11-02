@@ -16,13 +16,15 @@ const ResetPasswordVIew = () => {
   const params = new URLSearchParams(location.search);
   const email = params.get("email");
   const url = serverLink;
-  const handleResetPassword = (e) => {
-    e.preventDefault();
-    setIsButtonDisabled(true);
+
+  const apiCalled = () => {
+    
+
     const requestData = {
-      old_password: oldPassword,
       new_password: newPassword,
     };
+    setIsButtonDisabled(true);
+
     axios
       .post(
         `${url}/api/v1/users/password/change-password/${email}`,
@@ -31,6 +33,7 @@ const ResetPasswordVIew = () => {
       .then((response) => {
         setNewPassword("");
         setOldPassword("");
+        setIsButtonDisabled(false);
         console.log("POST request successful:", response);
         Swal.fire("Success");
       })
@@ -44,7 +47,28 @@ const ResetPasswordVIew = () => {
       })
       .finally(() => {
         setIsButtonDisabled(false);
+      }) 
+  }
+
+
+  const handleResetPassword = (e) => {
+    e.preventDefault();
+    // setIsButtonDisabled(true);
+
+    console.log("New Password",oldPassword , newPassword)
+
+    oldPassword === newPassword ? apiCalled() :  Swal.fire({
+        icon: "error",
+        text: "Password doesn't match!",
       });
+
+
+
+      
+      //  Swal.fire({
+      //   icon: "error",
+      //   text: "Password doesn't match!",
+      // });
   };
 
   return (
@@ -66,7 +90,7 @@ const ResetPasswordVIew = () => {
 
           <div className="sign-up ps-2">
             <label htmlFor="old_password" className="text-white mb-2">
-              Please enter your Old password*
+              Please enter your New password*
             </label>
             <div className="input_field mb-2">
               <input
@@ -83,7 +107,7 @@ const ResetPasswordVIew = () => {
 
           <div className="sign-up ps-2">
             <label htmlFor="new_password" className="text-white mb-2">
-              Please confirm your new password*
+              Please confirm your password*
             </label>
             <div className="input_field mb-2">
               <input
