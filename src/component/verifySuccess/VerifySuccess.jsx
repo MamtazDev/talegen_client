@@ -27,7 +27,7 @@ const VerifySuccess = () => {
           .then((response) => {
             console.log("POST request successful:", response);
             Swal.fire("Your Verification is done.");
-            // navigate(`/`);
+            navigate(`/`);
           })
           .catch((error) => {
             console.error("Error making POST request:", error);
