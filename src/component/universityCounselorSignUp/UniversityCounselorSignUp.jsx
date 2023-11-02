@@ -93,9 +93,9 @@ const UniversityCounselorSignUp = () => {
       )
       .then((response) => {
         console.log("POST request successful:", response);
-        Swal.fire(
-          'Verify Your Email Address',
-        )
+        // Swal.fire(
+        //   'Verify Your Email Address',
+        // )
         navigate(
           `/verifyemail?email=${uniCounsellorDetails.email}&signup=true`
         );

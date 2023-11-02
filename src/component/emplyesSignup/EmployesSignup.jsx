@@ -30,7 +30,7 @@ const EmployesSignup = () => {
       .post(`${url}/api/v1/users/signup`, employeeDetails)
       .then((response) => {
         console.log("POST request successful:", response);
-        Swal.fire("Verify Your Email Address");
+        // Swal.fire("Verify Your Email Address");
         navigate(`/verifyemail?email=${employeeDetails.email}&signup=true`);
       })
       .catch((error) => {

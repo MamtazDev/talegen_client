@@ -129,7 +129,7 @@ const StudentSignup = () => {
       .post(`${url}/api/v1/users/signup`, studentDetails)
       .then((response) => {
         console.log("POST request successful:", response);
-        Swal.fire("Verify Your Email Address");
+        // Swal.fire("Verify Your Email Address");
         navigate(`/verifyemail?email=${studentDetails.email}&signup=true`);
       })
       .catch((error) => {
