@@ -8,6 +8,7 @@ body {
 }
 
 .main_wrapper {
+    padding: 0 10px;
     max-width: 600px;
     width: 100%;
     margin-left: auto;

@@ -12,3 +12,9 @@
 .disable_btn:hover {
     background: #ff6528;
 }
+
+@media(max-width: 576px) {
+    h2 {
+        font-size: 18px;
+    }
+}
