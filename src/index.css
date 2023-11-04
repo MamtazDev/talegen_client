@@ -84,3 +84,17 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
     box-shadow: none !important;
     background-color: #5d110f !important;
 }
+
+@media(max-width: 568px) {
+    .main_wrapper h2 {
+        font-size: 18px !important;
+    }
+
+    .main_wrapper label {
+        font-size: 14px !important;
+    }
+
+    .main_wrapper a {
+        font-size: 12px !important;
+    }
+}
